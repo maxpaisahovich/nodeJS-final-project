@@ -1,0 +1,59 @@
+@local=http://localhost:3001
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y2MGNiYmM2MDkxZDExMGNlMzY5MDMiLCJiaXoiOmZhbHNlLCJpYXQiOjE2Nzc1OTA2OTh9.QI_6s40F5RfNuIbtV6RJOUUy4-GZ0J-0mXu6Xe2tZaw
+
+### register a new user
+POST {{local}}/users/
+Content-Type: application/json
+
+{
+    "name": "max",
+    "email": "m@gmail.com",
+    "password": "12345678",
+    "biz": false
+}
+
+### authenticate (login) an existing user
+POST {{local}}/auth
+Content-Type: application/json
+
+{
+    "email": "m@gmail.com",
+    "password": "12345678"
+}
+
+### get logged in user's info
+GET {{local}}/users/me 
+x-auth-token: {{token}}
+
+### create new card
+POST {{local}}/cards/
+x-auth-token: {{token}}
+Content-Type: application/json
+
+ {
+    "bizName": "pokemon",
+    "bizDescription": "pokemon card stand",
+    "bizAddress": "sokolov 15",
+    "bizPhone": "054536634"
+ }
+
+
+### get card
+GET {{local}}/cards/63fe02eae4723c38f9c42cdb
+x-auth-token: {{token}}
+
+### put card
+PUT {{local}}/cards/63fe02eae4723c38f9c42cdb
+x-auth-token: {{token}}
+Content-Type: application/json
+
+ {
+    "bizName": "Pokemon",
+    "bizDescription": "Pokemon Card Stand",
+    "bizAddress": "Sokolov 15",
+    "bizPhone": "054536634"
+ }
+
+### delete card
+DELETE {{local}}/cards/63fe02eae4723c38f9c42cdb
+x-auth-token: {{token}}
