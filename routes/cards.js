@@ -9,6 +9,12 @@ const {
 
 const authMW = require("../middleware/authMw");
 
+router.get("/my-cards", authMW, async (req, res) => {
+  if (!req.user.biz) return res.status(401).send("Access denied.");
+  const cards = await Card.find({ user_id: req.user._id });
+  res.send(cards);
+});
+
 router.put("/:id", authMW, async (req, res) => {
   const { error } = validateCard(req.body);
   if (error) {
